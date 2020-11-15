@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ExampleComponent } from 'danger-calendar'
+import Calendar from 'danger-calendar'
 import 'danger-calendar/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <Calendar />
 }
 
 export default App

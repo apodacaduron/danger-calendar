@@ -59,5 +59,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "dayjs": "^1.9.6",
+    "node-sass": "^5.0.0"
+  }
 }
