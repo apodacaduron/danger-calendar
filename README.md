@@ -13,15 +13,13 @@ npm install --save danger-calendar
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'danger-calendar'
+import Calendar from 'danger-calendar'
 import 'danger-calendar/dist/index.css'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const Example = () => {
+  return <Calendar />
 }
 ```
 
