@@ -6,7 +6,7 @@ import 'danger-calendar/dist/index.css'
 const App = () => {
   return (
     <div className='fullscreen'>
-      <Calendar />
+      <Calendar onClick={(value) => console.log(value)} />
     </div>
   )
 }

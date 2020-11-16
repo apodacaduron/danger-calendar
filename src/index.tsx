@@ -6,10 +6,11 @@ import isToday from 'dayjs/plugin/isToday'
 dayjs.extend(isToday)
 
 interface Props {
-  iso?: boolean
+  iso?: false
+  onClick: (value: String) => void
 }
 
-const Calendar = ({ iso = false }: Props) => {
+const Calendar = ({ iso, onClick }: Props) => {
   let today = dayjs()
   const [selectedDate, setSelectedDate] = useState(dayjs())
   const [monthWeekDays, setMonthWeekDays] = useState(
@@ -78,12 +79,15 @@ const Calendar = ({ iso = false }: Props) => {
               <tr key={idx}>
                 {week.days.map((day, index) => (
                   <td
-                    className={`danger-day-box ${
+                    className={`danger-day-box danger-day-box-pointer ${
                       day.day() === 6 || day.day() === 0
                         ? 'danger-day-box-week-end'
                         : ''
                     }`}
                     key={index}
+                    onClick={() => {
+                      onClick(day.format('YYYY-MM-DD'))
+                    }}
                   >
                     <div
                       className={`danger-day-number ${
