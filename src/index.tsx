@@ -6,11 +6,13 @@ import isToday from 'dayjs/plugin/isToday'
 dayjs.extend(isToday)
 
 interface Props {
-  iso?: false
-  onClick: (value: String) => void
+  iso?: boolean
+  onClick?: (value: Object) => void
+  onDoubleClick?: (value: Object) => void
+  lang?: string
 }
 
-const Calendar = ({ iso, onClick }: Props) => {
+const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
   let today = dayjs()
   const [selectedDate, setSelectedDate] = useState(dayjs())
   const [monthWeekDays, setMonthWeekDays] = useState(
@@ -85,9 +87,14 @@ const Calendar = ({ iso, onClick }: Props) => {
                         : ''
                     }`}
                     key={index}
-                    onClick={() => {
-                      onClick(day.format('YYYY-MM-DD'))
-                    }}
+                    onClick={(evt) =>
+                      onClick &&
+                      onClick({ ...evt, date: day.format('YYYY-MM-DD') })
+                    }
+                    onDoubleClick={(evt) =>
+                      onDoubleClick &&
+                      onDoubleClick({ ...evt, date: day.format('YYYY-MM-DD') })
+                    }
                   >
                     <div
                       className={`danger-day-number ${

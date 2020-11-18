@@ -15,11 +15,12 @@ interface DaysArr {
 }
 
 const weekDays = (month: number, year: number, iso: boolean = false) => {
-  const endDate = dayjs().year(year).month(month).endOf('month')
+  const today = dayjs()
+  const endDate = today.year(year).month(month).endOf('month')
   return Array(endDate.date())
     .fill(0)
     .map((_, i: number) =>
-      dayjs()
+      today
         .year(year)
         .month(month)
         .date(i + 1)
@@ -35,7 +36,7 @@ const weekDays = (month: number, year: number, iso: boolean = false) => {
           days: Array(7)
             .fill(0)
             .map((_, i) =>
-              dayjs()
+              today
                 .week(week)
                 .startOf(iso ? 'isoWeek' : 'week')
                 .add(i, 'day')

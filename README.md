@@ -23,6 +23,14 @@ const Example = () => {
 }
 ```
 
+## Props
+
+| Property        | Type       | Values         | Description                                                               | Default |
+| --------------- | ---------- | -------------- | ------------------------------------------------------------------------- | ------- |
+| `onClick`       | `Function` |                | Trigger function and returns a click event with a date after click        |         |
+| `onDoubleCLick` | `Function` |                | Trigger function and returns a click event with a date after double click |         |
+| `iso`           | `Boolean`  | `true` `false` | Changes calendar format to ISO 8601 (ISO 8601 starts in monday)           | `false` |
+
 ## License
 
 MIT © [](https://github.com/)
