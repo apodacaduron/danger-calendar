@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import './styles.sass'
 import weekDays from './Utils/WeekDays'
 import isToday from 'dayjs/plugin/isToday'
+import CalendarHeader from './Components/CalendarHeader/CalendarHeader'
+import CalendarTable from './Components/CalendarTable/CalendarTable'
 dayjs.extend(isToday)
 
 interface Props {
@@ -12,10 +14,47 @@ interface Props {
   lang?: string
 }
 
+const events = [
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: '',
+    color: '#8e44ad'
+  },
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: '',
+    color: '#27ae60'
+  },
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: ''
+  },
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: '',
+    color: '#27ae60'
+  },
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: '',
+    color: '#27ae60'
+  },
+  {
+    date: '2020-11-22 00:00:00',
+    title: 'Happy Birthday',
+    description: '',
+    color: '#8e44ad'
+  }
+]
+
 const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
-  let today = dayjs()
   const [selectedDate, setSelectedDate] = useState(dayjs())
-  const [monthWeekDays, setMonthWeekDays] = useState(
+  const [monthWeeks, setMonthWeeks] = useState(
     weekDays(selectedDate.month(), selectedDate.year(), iso)
   )
   const [currentMonthText, setCurrentMonthText] = useState(
@@ -27,42 +66,22 @@ const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
 
   const setDate = (date: Dayjs) => {
     setSelectedDate(date)
-    setMonthWeekDays(weekDays(date.month(), date.year(), iso))
+    setMonthWeeks(weekDays(date.month(), date.year(), iso))
     setCurrentMonthText(date.format('MMMM'))
     setCurrentYearText(date.format('YYYY'))
   }
 
   return (
     <div id='danger-calendar'>
-      <div className='danger-heading'>
-        <div className='danger-current-date'>
-          <span className='danger-month'>{currentMonthText} </span>
-          <span className='danger-year'>{currentYearText}</span>
-        </div>
-        <div className='danger-actions'>
-          <button
-            className='danger-calendar-button'
-            onClick={() => setDate(selectedDate.subtract(1, 'month'))}
-          >
-            {'<'}
-          </button>
-          <button
-            className='danger-calendar-button'
-            onClick={() => setDate(today)}
-          >
-            Today
-          </button>
-          <button
-            className='danger-calendar-button'
-            onClick={() => setDate(selectedDate.add(1, 'month'))}
-          >
-            {'>'}
-          </button>
-        </div>
-      </div>
+      <CalendarHeader
+        setDate={setDate}
+        month={currentMonthText}
+        year={currentYearText}
+        selectedDate={selectedDate}
+      />
       <div className='danger-days-container'>
         <div className='danger-table-header'>
-          {monthWeekDays[0].days.map((day, index: number) => (
+          {monthWeeks[0].days.map((day, index: number) => (
             <div
               key={index}
               className={`danger-day-of-week ${
@@ -75,40 +94,12 @@ const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
             </div>
           ))}
         </div>
-        <table className='danger-days-table'>
-          <tbody>
-            {monthWeekDays.map((week, idx: number) => (
-              <tr key={idx}>
-                {week.days.map((day, index) => (
-                  <td
-                    className={`danger-day-box danger-day-box-pointer ${
-                      day.day() === 6 || day.day() === 0
-                        ? 'danger-day-box-week-end'
-                        : ''
-                    }`}
-                    key={index}
-                    onClick={(evt) =>
-                      onClick &&
-                      onClick({ ...evt, date: day.format('YYYY-MM-DD') })
-                    }
-                    onDoubleClick={(evt) =>
-                      onDoubleClick &&
-                      onDoubleClick({ ...evt, date: day.format('YYYY-MM-DD') })
-                    }
-                  >
-                    <div
-                      className={`danger-day-number ${
-                        day.isToday() ? 'danger-day-today-indicator' : ''
-                      }`}
-                    >
-                      {day.format('D')}
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <CalendarTable
+          onClick={onClick}
+          onDoubleClick={onDoubleClick}
+          weeks={monthWeeks}
+          events={events}
+        />
       </div>
     </div>
   )

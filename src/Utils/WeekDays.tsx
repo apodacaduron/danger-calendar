@@ -2,15 +2,11 @@ import dayjs, { Dayjs } from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 import isoWeek from 'dayjs/plugin/isoWeek'
+import { Week } from '../Interfaces/interfaces'
 dayjs.extend(isoWeek)
 
 interface WeekObj {
   day: Dayjs
-  week: number
-}
-
-interface DaysArr {
-  days: Array<Dayjs>
   week: number
 }
 
@@ -41,7 +37,7 @@ const weekDays = (month: number, year: number, iso: boolean = false) => {
                 .startOf(iso ? 'isoWeek' : 'week')
                 .add(i, 'day')
             )
-        } as DaysArr)
+        } as Week)
     )
 }
 
