@@ -19,7 +19,28 @@ import Calendar from 'danger-calendar'
 import 'danger-calendar/dist/index.css'
 
 const Example = () => {
-  return <Calendar />
+  const events = [
+    {
+      date: '2020-11-22 00:00:00',
+      title: 'Happy Birthday',
+      description: '',
+      color: '#8e44ad'
+    },
+    {
+      date: '2020-11-18 00:00:00',
+      title: 'Meeting',
+      description: '',
+      color: '#27ae60'
+    }
+  ]
+  return (
+    <Calendar
+      onClick={(value) => console.log(value)}
+      onDoubleClick={(value) => console.log(value)}
+      events={events}
+      iso={false}
+    />
+  )
 }
 ```
 

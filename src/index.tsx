@@ -6,6 +6,7 @@ import isToday from 'dayjs/plugin/isToday'
 import CalendarHeader from './Components/CalendarHeader/CalendarHeader'
 import CalendarTable from './Components/CalendarTable/CalendarTable'
 import CalendarHeading from './Components/CalendarHeading/CalendarHeading'
+import { DayEvent } from './Interfaces/interfaces'
 dayjs.extend(isToday)
 
 interface Props {
@@ -13,47 +14,10 @@ interface Props {
   onClick?: (value: Object) => void
   onDoubleClick?: (value: Object) => void
   lang?: string
+  events?: Array<DayEvent>
 }
 
-const events = [
-  {
-    date: '2020-11-22 00:00:00',
-    title: 'Happy Birthday',
-    description: '',
-    color: '#8e44ad'
-  },
-  {
-    date: '2020-11-18 00:00:00',
-    title: 'Happy Birthday',
-    description: '',
-    color: '#27ae60'
-  },
-  {
-    date: '2020-11-22 13:00:00',
-    title: 'Happy Birthday',
-    description: ''
-  },
-  {
-    date: '2020-11-22 00:00:00',
-    title: 'Happy Birthday',
-    description: '',
-    color: '#27ae60'
-  },
-  {
-    date: '2020-11-22 00:00:00',
-    title: 'Happy Birthday',
-    description: '',
-    color: '#27ae60'
-  },
-  {
-    date: '2020-11-22 00:00:00',
-    title: 'Happy Birthday',
-    description: '',
-    color: '#8e44ad'
-  }
-]
-
-const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
+const Calendar = ({ iso = false, onClick, onDoubleClick, events }: Props) => {
   const [selectedDate, setSelectedDate] = useState(dayjs())
   const [monthWeeks, setMonthWeeks] = useState(
     weekDays(selectedDate.month(), selectedDate.year(), iso)

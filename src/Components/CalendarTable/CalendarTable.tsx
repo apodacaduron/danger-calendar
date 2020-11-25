@@ -9,7 +9,7 @@ interface Props {
   weeks: Array<Week>
   onClick?: (value: Object) => void
   onDoubleClick?: (value: Object) => void
-  events: Array<DayEvent>
+  events?: Array<DayEvent>
 }
 
 const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
