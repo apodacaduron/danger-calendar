@@ -24,6 +24,10 @@ const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
                   day.day() === 6 || day.day() === 0
                     ? 'danger-day-box-week-end'
                     : ''
+                } ${
+                  weeks.length > 5
+                    ? 'danger-six-week-height'
+                    : 'danger-five-week-height'
                 }`}
                 key={index}
                 onClick={(evt) =>

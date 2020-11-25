@@ -14,9 +14,10 @@ const EventIndicator = ({ events, day }: Props) => {
     <div>
       {events &&
         events.map(
-          (event) =>
+          (event, index: number) =>
             dayjs(event.date).isSame(day) && (
               <div
+                key={index}
                 className='danger-event-indicator'
                 style={{ background: event.color || '#1B9CFC' }}
               >
