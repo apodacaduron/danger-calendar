@@ -5,6 +5,7 @@ import weekDays from './Utils/WeekDays'
 import isToday from 'dayjs/plugin/isToday'
 import CalendarHeader from './Components/CalendarHeader/CalendarHeader'
 import CalendarTable from './Components/CalendarTable/CalendarTable'
+import CalendarHeading from './Components/CalendarHeading/CalendarHeading'
 dayjs.extend(isToday)
 
 interface Props {
@@ -22,13 +23,13 @@ const events = [
     color: '#8e44ad'
   },
   {
-    date: '2020-11-22 00:00:00',
+    date: '2020-11-18 00:00:00',
     title: 'Happy Birthday',
     description: '',
     color: '#27ae60'
   },
   {
-    date: '2020-11-22 00:00:00',
+    date: '2020-11-22 13:00:00',
     title: 'Happy Birthday',
     description: ''
   },
@@ -80,20 +81,7 @@ const Calendar = ({ iso = false, onClick, onDoubleClick }: Props) => {
         selectedDate={selectedDate}
       />
       <div className='danger-days-container'>
-        <div className='danger-table-header'>
-          {monthWeeks[0].days.map((day, index: number) => (
-            <div
-              key={index}
-              className={`danger-day-of-week ${
-                day.day() === 6 || day.day() === 0
-                  ? 'danger-day-of-week-end'
-                  : ''
-              }`}
-            >
-              {day.format('ddd')}
-            </div>
-          ))}
-        </div>
+        <CalendarHeading weeks={monthWeeks} />
         <CalendarTable
           onClick={onClick}
           onDoubleClick={onDoubleClick}

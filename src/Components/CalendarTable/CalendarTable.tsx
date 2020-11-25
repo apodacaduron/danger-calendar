@@ -38,7 +38,7 @@ const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
                   onDoubleClick({ ...evt, date: day.format('YYYY-MM-DD') })
                 }
               >
-                <EventIndicator day={day} events={events} />
+                <EventIndicator day={day} events={events} limit={3} />
                 <DayIndicator day={day} />
               </td>
             ))}

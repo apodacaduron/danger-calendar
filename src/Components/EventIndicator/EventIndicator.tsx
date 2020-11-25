@@ -7,24 +7,37 @@ import { DayEvent } from '../../Interfaces/interfaces'
 interface Props {
   events?: Array<DayEvent>
   day: Dayjs
+  limit?: number
 }
 
-const EventIndicator = ({ events, day }: Props) => {
+const EventIndicator = ({ events, day, limit = 3 }: Props) => {
+  const matchDayEvents =
+    events &&
+    events.filter((event) =>
+      dayjs(dayjs(event.date).format('YYYY-MM-DD')).isSame(day)
+    )
+
   return (
     <div>
-      {events &&
-        events.map(
-          (event, index: number) =>
-            dayjs(event.date).isSame(day) && (
+      {matchDayEvents &&
+        matchDayEvents.map((evt, index: number) => {
+          return (
+            index < limit && (
               <div
                 key={index}
                 className='danger-event-indicator'
-                style={{ background: event.color || '#1B9CFC' }}
+                style={{ background: evt.color || '#1B9CFC' }}
               >
-                {event.title}
+                {evt.title}
               </div>
             )
-        )}
+          )
+        })}
+      {matchDayEvents && matchDayEvents.length > limit && (
+        <div className='danger-more-events'>
+          And {matchDayEvents.length - limit} events more
+        </div>
+      )}
     </div>
   )
 }
