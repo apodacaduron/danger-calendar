@@ -10,6 +10,7 @@ interface Props {
   onClick?: (value: Object) => void
   onDoubleClick?: (value: Object) => void
   events?: Array<DayEvent>
+  limit?: number
 }
 
 const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
@@ -38,7 +39,7 @@ const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
                   onDoubleClick({ ...evt, date: day.format('YYYY-MM-DD') })
                 }
               >
-                <EventIndicator day={day} events={events} limit={3} />
+                <EventIndicator day={day} events={events} limit={limit} />
                 <DayIndicator day={day} />
               </td>
             ))}

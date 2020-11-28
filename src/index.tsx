@@ -13,11 +13,18 @@ interface Props {
   iso?: boolean
   onClick?: (value: Object) => void
   onDoubleClick?: (value: Object) => void
+  eventLimit?: number
   lang?: string
   events?: Array<DayEvent>
 }
 
-const Calendar = ({ iso = false, onClick, onDoubleClick, events }: Props) => {
+const Calendar = ({
+  iso = false,
+  onClick,
+  onDoubleClick,
+  events,
+  eventLimit = 3
+}: Props) => {
   const [selectedDate, setSelectedDate] = useState(dayjs())
   const [monthWeeks, setMonthWeeks] = useState(
     weekDays(selectedDate.month(), selectedDate.year(), iso)
@@ -51,6 +58,7 @@ const Calendar = ({ iso = false, onClick, onDoubleClick, events }: Props) => {
           onDoubleClick={onDoubleClick}
           weeks={monthWeeks}
           events={events}
+          limit={eventLimit}
         />
       </div>
     </div>
