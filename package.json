@@ -1,10 +1,10 @@
 {
   "name": "danger-calendar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Made with create-react-library",
   "author": "",
   "license": "MIT",
-  "repository": "/danger-calendar",
+  "repository": "https://github.com/apodacaduron/danger-calendar",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",

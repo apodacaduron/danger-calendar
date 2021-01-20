@@ -13,7 +13,13 @@ interface Props {
   limit?: number
 }
 
-const CalendarTable = ({ weeks, onClick, onDoubleClick, events }: Props) => {
+const CalendarTable = ({
+  weeks,
+  onClick,
+  onDoubleClick,
+  events,
+  limit = 3
+}: Props) => {
   return (
     <table className='danger-days-table' cellPadding='0' cellSpacing='0'>
       <tbody>
